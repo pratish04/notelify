@@ -13,7 +13,6 @@ const Editor = (props) => {
   const [edit, setEdit] = useState(props.edit);
 
   const saveNote = async (noteTitle, noteContent) => {
-    console.log(noteTitle, noteContent);
     const res = await axios.post(
       process.env.SERVER_URL + "/home",
       {

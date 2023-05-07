@@ -14,7 +14,7 @@ const Editor=(props)=>{
 
     const saveNote=async(noteTitle, noteContent)=>{
         console.log(noteTitle, noteContent);
-        const res=await axios.post(process.env.SERVER_URL+"/home", {
+        const res=await axios.post(process.env.REACT_APP_SERVER_URL+"/home", {
             id: props.noteId,
             title: noteTitle, 
             content: noteContent,
@@ -35,7 +35,7 @@ const Editor=(props)=>{
             props.close();
         }
         else{
-            const res=await axios.delete(process.env.SERVER_URL+"/delete",{
+            const res=await axios.delete(process.env.REACT_APP_SERVER_URL+"/delete",{
                 withCredentials: true,
                 data: {id: props.noteId},
             });

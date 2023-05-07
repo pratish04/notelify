@@ -6,8 +6,8 @@ import Home from "./components/Home/Home";
 function App() {
   return (
     <BrowserRouter>
-      <Routes> 
-        <Route exact path="/" element={<LoginRegister/>}/>
+      <Routes>
+        <Route exact path="/" element={<LoginRegister />} />
         <Route exact path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>

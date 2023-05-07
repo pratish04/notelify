@@ -16,7 +16,10 @@ const registerQueryPromise1 = (req) => {
         if (error) {
           reject(error);
         } else if (result.length !== 0) {
-            reject({ emailAlreadyInUse: true, message: "USER REGISTRATION FAILURE!"});
+          reject({
+            emailAlreadyInUse: true,
+            message: "USER REGISTRATION FAILURE!",
+          });
         } else {
           resolve(result);
         }
@@ -71,13 +74,13 @@ router.post("/", async (req, res) => {
       { userId: result3[0].userId },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: '24h',
+        expiresIn: "24h",
       }
     );
     res
       .cookie("accessToken", token, {
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: "none",
         secure: true,
       })
       .send({
@@ -85,7 +88,7 @@ router.post("/", async (req, res) => {
         message: "USER REGISTRATION SUCCESSFUL!",
       });
     console.log("USER REGISTRATION SUCCESSFUL!");
-  } catch(error){
+  } catch (error) {
     console.log("USER REGISTRATION FAILURE!", error);
     res.send(error);
   }

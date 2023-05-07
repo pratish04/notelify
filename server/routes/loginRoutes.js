@@ -40,13 +40,13 @@ router.post("/", (req, res) => {
                   },
                   process.env.ACCESS_TOKEN_SECRET,
                   {
-                    expiresIn: '24h',
+                    expiresIn: "24h",
                   }
                 );
                 res
                   .cookie("accessToken", token, {
                     httpOnly: true,
-                    sameSite: 'none',
+                    sameSite: "none",
                     secure: true,
                   })
                   .send({ message: "USER LOGGED IN!" });
@@ -63,7 +63,7 @@ router.post("/", (req, res) => {
         }
       }
     );
-  } catch(err){
+  } catch (err) {
     console.log("USER LOGIN FAILURE!", err);
   }
 });

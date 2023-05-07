@@ -6,8 +6,8 @@ const cors = require("cors");
 const registerRoutes = require("./routes/registerRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const homeRoutes = require("./routes/homeRoutes");
-const deleteRoutes=require("./routes/deleteRoutes");
-const logoutRoute=require("./routes/logoutRoute");
+const deleteRoutes = require("./routes/deleteRoutes");
+const logoutRoute = require("./routes/logoutRoute");
 
 const PORT = process.env.PORT || 3001;
 

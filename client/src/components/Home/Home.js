@@ -51,9 +51,9 @@ const Home=()=>{
     return (
         <div className="home">
             <Navbar loggedIn={loggedIn}/>
-            <div className="search">
+            {/* <div className="search"> */}
                 {/* search bar here! */}
-            </div>
+            {/* </div> */}
             <div className="home-body">
                 <div className="notes-body">
                     { notes.length!==0?

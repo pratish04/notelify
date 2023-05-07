@@ -7,7 +7,7 @@ const authorization = (req, res, next) => {
   try {
     const token = req.cookies.accessToken;
     if (!token) {
-      res.send({ noToken: true, message: "USER AUTHENTICATED!" });
+      res.send({ noToken: true, message: "USER UNAUTHENTICATED!" });
     } else {
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) {

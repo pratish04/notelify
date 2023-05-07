@@ -5,12 +5,14 @@ const authorization = require("../middlewares/authorization");
 
 router.get("/", authorization, (req, res)=>{
     try{
-        res.clearCookie("accessToken").send({
+        res.clearCookie("accessToken", {
+            path: "/",
+        }).send({
             loggedOut: true, 
             message: "SUCCESSFULLY LOGGED OUT!"
         });
     }catch(err){
-        console.log("LOGOUT FAILURE!", err); 
+        console.error("LOGOUT FAILURE!", err); 
         res.send({message: "LOGOUT FAILURE!"});   
     }
 });

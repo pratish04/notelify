@@ -83,7 +83,6 @@ const LoginRegister=()=>{
     };
     
     const onSignIn = async () => {
-        console.log("clicked");
         setCredentials({ ...credentials, password: "" });
         try {
             const res = await axios.post(

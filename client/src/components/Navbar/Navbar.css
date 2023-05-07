@@ -66,13 +66,12 @@
 }
 
 .options>div>div{
-    margin: 0 0 5px 0;
     width: 90%;
-    padding: 0 5%;
+    padding: 5%;
     background-color: white;
     box-shadow: 0 0 10px 5px #dfdfdf90 inset;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
 .options>div>div:hover{

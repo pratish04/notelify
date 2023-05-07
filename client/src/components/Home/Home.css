@@ -1,0 +1,130 @@
+.home{
+    width: 98%;
+    height: 100vh;
+    min-height: fit-content;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+}
+
+.home-body{
+    margin-top: 90px;
+    /* margin-top: 150px; //use this when search bar is added*/ 
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    height: fit-content;
+}
+
+.notes-body{
+    width: 80%;
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    padding: 5%;
+}
+
+.notes-body>div{
+    margin: 10px;
+    width: 240px;
+    padding: 5px;
+    height: 100px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: -2px 5px 5px 1px #dfdfdf, 0 0 5px 1px #dfdfdf90 inset;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;    
+    position: relative;
+}
+
+.notes-body>div:hover{
+    transition: .25s;
+    transform: scale(1.1, 1.1);
+}
+
+.notes-body>div>span{
+    margin: 3px;
+    color: grey;
+    word-break: break-all;
+}
+
+.notes-body>div>div{
+    position: absolute;
+    bottom: 1px;
+    font-size: 12px;
+    margin: 5px;
+    color: #dfdfdfff;
+
+}
+
+.title{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.content{
+    font-style: oblique;
+    letter-spacing: 1px;
+}
+
+.delete-icon{
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+}
+
+.empty{
+    width: 200px;
+    padding: 50px;
+    height: 100px;
+    box-shadow: -2px 5px 5px 1px #dfdfdf, 0 0 5px 1px #dfdfdf90 inset;
+    letter-spacing: 1px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.add{
+    box-shadow: 0 0 10px 5px grey;
+    cursor: pointer;
+    position: fixed;
+    bottom: 15%;
+    right: 50px;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+    background-color: grey;
+    font-weight: bold;
+}
+
+.add:hover{
+    box-shadow: -1px 0 5px 2px grey;
+    transition: 1s;
+    transform: scale(1.1, 1.1);
+    rotate: 360deg;
+}
+
+.add:not(:hover){
+    rotate: -360deg;
+    transition: 1s;
+}
+
+.hide{
+    display: none;
+}

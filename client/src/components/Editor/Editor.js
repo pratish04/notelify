@@ -12,39 +12,41 @@ const Editor = (props) => {
   const [content, setContent] = useState(props.content);
   const [edit, setEdit] = useState(props.edit);
 
-    const saveNote=async(noteTitle, noteContent)=>{
-        console.log(noteTitle, noteContent);
-        const res=await axios.post(process.env.SERVER_URL+"/home", {
-            id: props.noteId,
-            title: noteTitle, 
-            content: noteContent,
-            userId: props.userId,
-        },
-        {
-            withCredentials: true,
-        });
-        if(res.data.noteSaved){
-            console.log(res.data.message);
-            window.location.reload();
-        }
-        else console.log(res.data.message);
-    }
+  const saveNote = async (noteTitle, noteContent) => {
+    console.log(noteTitle, noteContent);
+    const res = await axios.post(
+      process.env.REACT_APP_SERVER_URL + "/home",
+      {
+        id: props.noteId,
+        title: noteTitle,
+        content: noteContent,
+        userId: props.userId,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    if (res.data.noteSaved) {
+      console.log(res.data.message);
+      window.location.reload();
+    } else console.log(res.data.message);
+  };
 
-    const deleteNote=async()=>{
-        if((props.title==="" && props.content==="")){
-            props.close();
+  const deleteNote = async () => {
+    if (props.title === "" && props.content === "") {
+      props.close();
+    } else {
+      const res = await axios.delete(
+        process.env.REACT_APP_SERVER_URL + "/delete",
+        {
+          withCredentials: true,
+          data: { id: props.noteId },
         }
-        else{
-            const res=await axios.delete(process.env.SERVER_URL+"/delete",{
-                withCredentials: true,
-                data: {id: props.noteId},
-            });
-            if(res.data.noteDeleted){
-                console.log(res.data.message);
-                window.location.reload();
-            }
-            else console.log(res.data.message);
-        }
+      );
+      if (res.data.noteDeleted) {
+        console.log(res.data.message);
+        window.location.reload();
+      } else console.log(res.data.message);
     }
   };
 

@@ -1,5 +1,6 @@
 .home {
   width: 98%;
+  min-width: fit-content;
   height: 100vh;
   min-height: fit-content;
   padding: 1%;
@@ -13,19 +14,21 @@
   display: flex;
   justify-content: center;
   padding: 10px;
+  width: 100%;
   height: fit-content;
-  position: relative;
 }
 
 .notes-body {
   width: 80%;
+  min-width: 300px;
   margin: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   height: fit-content;
-  padding: 5%;
+  padding: 5px;
+  box-shadow: -2px 2px 5px 2px #dfdfdf ;
 }
 
 .notes-body > div {

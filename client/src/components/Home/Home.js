@@ -67,10 +67,10 @@ const Home = () => {
                   }}
                 >
                   <span className="title">
-                    {note.noteTitle.substr(0, 29) + "..."}
+                    {note.noteTitle.substr(0, 20)}{note.noteTitle.length >20 ? "..." : ""}
                   </span>
                   <span className="content">
-                    {note.noteContent.substr(0, 50) + "..."}
+                    {note.noteContent.substr(0, 50)}{(note.noteContent.length>50)?"...":""}
                   </span>
                   <div>
                     {note.createdOn.slice(0, 10).replace(/-/g, "/")}{" "}

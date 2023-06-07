@@ -46,16 +46,6 @@ const Home = () => {
     setEditor(false);
   };
 
-  const click= async()=>{
-    const res=await axios.get(
-      process.env.REACT_APP_SERVER_URL+"/loglog",
-      {
-        withCredentials: true,
-      }
-    );
-    console.log(res.data);
-  }
-
   return (
     
     <div className="home">
@@ -63,10 +53,7 @@ const Home = () => {
       {/* <div className="search"> */}
       {/* search bar here! */}
       {/* </div> */}
-      <button onClick={click}>
-        click
-      </button>
-      {/* <div className="home-body">
+      <div className="home-body">
         <div className="notes-body">
           {notes.length !== 0 ? (
             notes.map((note, index) => {
@@ -115,7 +102,7 @@ const Home = () => {
             edit={title === "" && content === "" ? true : false}
           />
         )}
-      </div> */}
+      </div>
       <div
         className={editor ? "hide" : "add"}
         onClick={() => {

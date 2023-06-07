@@ -3,10 +3,10 @@ const mysql = require("mysql");
 require("dotenv").config();
 
 const dbConfig = {
-  host: process.env.HOST,
-  database: process.env.DATABASE,
-  user: process.env.USER,
-  password: process.env.DATABASE_PASSWORD,
+  host: process.env.MYSQL_HOST,
+  database: process.env.MYSQL_DATABASE,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_DATABASE_PASSWORD,
   multipleStatements: true,
 };
 

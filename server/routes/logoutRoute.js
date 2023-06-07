@@ -8,11 +8,10 @@ const redisClient = require("../database/redisClient");
 router.get("/", authorization, async (req, res) => {
   try {
     const token = req.cookies.accessToken;
-    console.log(token);
     await redisClient.set(token, 1);
-    await redisClient.expireAt(token, Math.round(new Date().getTime() / 1000)+30);
+    await redisClient.expireAt(token, req.data.iat + 24 * 60 * 60);
     console.log("TOKEN BLACKLISTED!");
-    // res.clearCookie("accessToken");
+    res.clearCookie("accessToken");
     res.send({
       loggedOut: true,
       message: "SUCCESSFULLY LOGGED OUT!",

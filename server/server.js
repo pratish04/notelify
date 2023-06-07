@@ -9,6 +9,8 @@ const homeRoutes = require("./routes/homeRoutes");
 const deleteRoutes = require("./routes/deleteRoutes");
 const logoutRoute = require("./routes/logoutRoute");
 
+const authorization = require("./middlewares/authorization");
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();

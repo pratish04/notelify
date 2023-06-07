@@ -71,7 +71,10 @@ router.post("/", async (req, res) => {
     const result2 = await registerQueryPromise2(req);
     const result3 = await registerQueryPromise3(req);
     const token = jwt.sign(
-      { userId: result3[0].userId },
+      {
+        userId: result3[0].userId,
+        iat: Math.round(new Date().getTime() / 1000),
+      },
       process.env.ACCESS_TOKEN_SECRET,
       {
         expiresIn: "24h",

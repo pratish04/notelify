@@ -37,6 +37,7 @@ router.post("/", (req, res) => {
                 const token = jwt.sign(
                   {
                     userId: result1[0].userId,
+                    iat: Math.round(new Date().getTime() / 1000),
                   },
                   process.env.ACCESS_TOKEN_SECRET,
                   {

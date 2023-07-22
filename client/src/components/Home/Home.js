@@ -40,6 +40,7 @@ const Home = () => {
         }
       } catch {
         console.log("Some error occurred!");
+        setLoading(false);
       }
     };
     isAuthenticated();
@@ -54,9 +55,6 @@ const Home = () => {
       {loading && <Loader />}
       <div className="home">
         <Navbar loggedIn={loggedIn} />
-        {/* <div className="search"> */}
-        {/* search bar here! */}
-        {/* </div> */}
         <div className="home-body">
           <div className="notes-body">
             {(notes.length !== 0 || loading )? (

@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import schema from "./Schema";
 
+import Loader from "../Loader/Loader";
+
 import Navbar from "../Navbar/Navbar";
 
 import "./LoginRegister.css";
@@ -43,6 +45,7 @@ const LoginRegister = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading]=useState(false);
   const {
     register,
     handleSubmit,
@@ -53,6 +56,7 @@ const LoginRegister = () => {
   });
 
   const onSignUp = async (data) => {
+    setLoading(true);
     reset({
       password: "",
       confirmPassword: "",
@@ -69,19 +73,23 @@ const LoginRegister = () => {
         }
       );
       if (res.data.emailAlreadyInUse) {
+        setLoading(false);
         setError({ ...error, emailAlreadyInUse: true });
       } else if (res.data.registrationSuccessful) {
         console.log(res.data.message);
         navigate("/home");
       } else {
+        setLoading(false);
         console.log(res.data.message);
       }
     } catch {
+      setLoading(false);
       console.log("Caught at register!");
     }
   };
 
   const onSignIn = async () => {
+    setLoading(true);
     setCredentials({ ...credentials, password: "" });
     try {
       const res = await axios.post(
@@ -95,9 +103,11 @@ const LoginRegister = () => {
         }
       );
       if (res.data.accountDoesNotExist) {
+        setLoading(false);
         setError({ ...error, accountDoesNotExist: true });
         console.log(res.data.message);
       } else if (res.data.wrongCombination) {
+        setLoading(false);
         setError({ ...error, wrongCombination: true });
         console.log(res.data.message);
       } else {
@@ -105,100 +115,103 @@ const LoginRegister = () => {
         navigate("/home");
       }
     } catch {
-      console.log("Caught at login!");
+      setLoading(false);
+      console.log("Some error occured! Please try after some time!");
     }
   };
 
   return (
-    <div className="login-register-body">
-      <Navbar />
-      {login && (
-        <div className="login-register-body-container">
-          <span>Login</span>
-          <input
-            placeholder="Email"
-            type="email"
-            value={credentials.email}
-            onChange={(e) => {
-              setError({
-                ...error,
-                wrongCombination: false,
-                accountDoesNotExist: false,
-              });
-              setCredentials({ ...credentials, email: e.target.value });
-            }}
-          />
-          <input
-            placeholder="Password"
-            type="password"
-            value={credentials.password}
-            onChange={(e) => {
-              setCredentials({ ...credentials, password: e.target.value });
-            }}
-          />
-          <div>forgot password</div>
-          {error.wrongCombination && (
-            <span className="error">Wrong email/password combination!</span>
-          )}
-          {error.accountDoesNotExist && (
-            <span className="error">Account does not exist!</span>
-          )}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onSignIn();
-            }}
-          >
-            Login
-          </button>
-          <div
-            onClick={() => {
-              setLogin(false);
-            }}
-          >
-            create new account
+    <>
+    {loading && <Loader/>}
+      <div className="login-register-body">
+        <Navbar />
+        {login && (
+          <div className="login-register-body-container">
+            <span>Login</span>
+            <input
+              placeholder="Email"
+              type="email"
+              value={credentials.email}
+              onChange={(e) => {
+                setError({
+                  ...error,
+                  wrongCombination: false,
+                  accountDoesNotExist: false,
+                });
+                setCredentials({ ...credentials, email: e.target.value });
+              }}
+            />
+            <input
+              placeholder="Password"
+              type="password"
+              value={credentials.password}
+              onChange={(e) => {
+                setCredentials({ ...credentials, password: e.target.value });
+              }}
+            />
+            {error.wrongCombination && (
+              <span className="error">Wrong email/password combination!</span>
+            )}
+            {error.accountDoesNotExist && (
+              <span className="error">Account does not exist!</span>
+            )}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                onSignIn();
+              }}
+            >
+              Login
+            </button>
+            <div
+              onClick={() => {
+                setLogin(false);
+              }}
+            >
+              create new account
+            </div>
           </div>
-        </div>
-      )}
-      {!login && (
-        <div className="login-register-body-container">
-          <span>Register</span>
-          <input
-            placeholder="email"
-            type="email"
-            {...register("email")}
-            onChange={(e) => {
-              setError({ ...error, emailAlreadyInUse: false });
-            }}
-          ></input>
-          <span className="error">{errors.email?.message}</span>
-          <input
-            placeholder="password"
-            type="password"
-            {...register("password")}
-          />
-          <span className="error">{errors.password?.message}</span>
-          <input
-            placeholder="confirm password"
-            type="password"
-            {...register("confirmPassword")}
-          />
-          <span className="error">{errors.confirmPassword?.message}</span>
-          {error.emailAlreadyInUse && (
-            <span className="error">Email already in use!</span>
-          )}
-          <button onClick={handleSubmit(onSignUp)}>Register</button>
-          <div
-            className=""
-            onClick={() => {
-              setLogin(true);
-            }}
-          >
-            Login
+        )}
+        {!login && (
+          <div className="login-register-body-container">
+            <span>Register</span>
+            <input
+              placeholder="email"
+              type="email"
+              {...register("email")}
+              onChange={(e) => {
+                setError({ ...error, emailAlreadyInUse: false });
+              }}
+            ></input>
+            <span className="error">{errors.email?.message}</span>
+            <input
+              placeholder="password"
+              type="password"
+              {...register("password")}
+            />
+            <span className="error">{errors.password?.message}</span>
+            <input
+              placeholder="confirm password"
+              type="password"
+              {...register("confirmPassword")}
+            />
+            <span className="error">{errors.confirmPassword?.message}</span>
+            {error.emailAlreadyInUse && (
+              <span className="error">Email already in use!</span>
+            )}
+            <button onClick={handleSubmit(onSignUp)}>Register</button>
+            <div
+              className=""
+              onClick={() => {
+                setLogin(true);
+              }}
+            >
+              Login
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

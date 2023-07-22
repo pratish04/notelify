@@ -4,25 +4,33 @@ import { useNavigate } from "react-router-dom";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 
+import Loader from "../Loader/Loader";
+
 import "./Navbar.css";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
 
   const [options, setOptions] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const logout = async () => {
+    setLoading(true);
     const res = await axios.get(process.env.REACT_APP_SERVER_URL + "/logout", {
       withCredentials: true,
     });
     if (res.data.loggedOut) {
       console.log(res.data.message);
       navigate("/");
-    } else console.log(res.data.message);
+    } else{
+      console.log(res.data.message);
+      setLoading(false);
+    }
   };
 
   return (
     <Fragment>
+      {loading && <Loader/>}
       <div className="navbar-body">
         <div className="navbar">
           <span style={{ fontWeight: "bold" }}>Notelify</span>

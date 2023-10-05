@@ -13,7 +13,7 @@ import "./Editor.css";
 const Editor = (props) => {
 
   const navigate = useNavigate();
-
+  
   const [title, setTitle] = useState(props.title);
   const [content, setContent] = useState(props.content);
   const [edit, setEdit] = useState(props.edit);
@@ -61,12 +61,12 @@ const Editor = (props) => {
       if (res.data.noteDeleted) {
         console.log(res.data.message);
         window.location.reload();
-      } else if (res.data.noToken || res.data.tokenInvalid) {
-        console.log(res.data.message);
-        navigate("/");
-      } else {
-        console.log(res.data.message);
-        setLoading(false);
+      }else if (res.data.noToken || res.data.tokenInvalid) {
+          console.log(res.data.message);
+          navigate("/");
+        } else{
+          console.log(res.data.message);
+          setLoading(false);
       }
     }
   };

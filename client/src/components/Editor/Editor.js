@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -10,6 +11,9 @@ import Loader from "../Loader/Loader";
 import "./Editor.css";
 
 const Editor = (props) => {
+
+  const navigate = useNavigate();
+  
   const [title, setTitle] = useState(props.title);
   const [content, setContent] = useState(props.content);
   const [edit, setEdit] = useState(props.edit);
@@ -33,7 +37,10 @@ const Editor = (props) => {
     if (res.data.noteSaved) {
       console.log(res.data.message);
       window.location.reload();
-    } else{
+    }else if (res.data.noToken || res.data.tokenInvalid) {
+      console.log(res.data.message);
+      navigate("/");
+    } else {
       console.log(res.data.message);
       setLoading(false);
     }
@@ -54,7 +61,10 @@ const Editor = (props) => {
       if (res.data.noteDeleted) {
         console.log(res.data.message);
         window.location.reload();
-      } else{
+      }else if (res.data.noToken || res.data.tokenInvalid) {
+          console.log(res.data.message);
+          navigate("/");
+        } else{
           console.log(res.data.message);
           setLoading(false);
       }

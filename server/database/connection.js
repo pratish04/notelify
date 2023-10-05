@@ -25,10 +25,15 @@ function handleDisconnect() {
   }); 
   connection.on("error", function (err) {
     console.log("db error", err);
-    if (err.code === "PROTOCOL_CONNECTION_LOST") {
-      handleDisconnect(); 
+    // if (err.code === "PROTOCOL_CONNECTION_LOST") {
+    //   handleDisconnect(); 
+    // } else {
+    //   throw err; 
+    // }
+    if (err.code) {
+      handleDisconnect();
     } else {
-      throw err; 
+      throw err;
     }
   });
 }
